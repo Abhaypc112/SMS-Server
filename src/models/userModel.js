@@ -4,9 +4,9 @@ const userSchema = new Schema(
     {
         email : {type : String, required : true, unique : true},
         name : {type : String, required : true},
-        role : {type : String, required: true},
+        role : {type : String, enum: ['admin', 'staff'], default:"staff"},
         password : {type : String, required : true},
-        permissions : {type : [String], required : true}
+        isActive :{type : Boolean, default : true}
     },
     { timestamps: true }
 );

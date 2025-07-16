@@ -1,6 +1,10 @@
 import express from 'express';
 import authRoutes from './routes/authRoutes.js';
 import cors from 'cors';
+import { errorHandler } from './middlewares/errorMiddleware.js';
+import studentRoutes from './routes/studentRoutes.js';
+import staffRoutes from './routes/staffRoutes.js';
+import permissionRoutes from './routes/permissionRoutes.js';
 export const app = express();
 
 app.use(express.json());
@@ -12,3 +16,8 @@ app.use(cors({
   })); 
 
 app.use('/api',authRoutes);
+app.use('/api',studentRoutes);
+app.use('/api',staffRoutes); 
+app.use('/api',permissionRoutes); 
+
+app.use(errorHandler);
