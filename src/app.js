@@ -11,17 +11,12 @@ dotenv.config();
 
 app.use(express.json());
 
-if(process.env.NODE_ENV === 'production'){
-  app.use(cors({
-      origin:"https://sms-client-prsr.vercel.app/",
-      credentials:true
-    })); 
-}else{
-  app.use(cors({
-      origin:"http://localhost:5173",
-      credentials:true
-    })); 
-}
+
+app.use(cors({ 
+  origin:"https://sms-client-prsr.vercel.app",
+  credentials:true
+})); 
+
 
 app.use('/api',authRoutes);
 app.use('/api',studentRoutes);
