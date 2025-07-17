@@ -5,15 +5,23 @@ import { errorHandler } from './middlewares/errorMiddleware.js';
 import studentRoutes from './routes/studentRoutes.js';
 import staffRoutes from './routes/staffRoutes.js';
 import permissionRoutes from './routes/permissionRoutes.js';
+import dotenv from 'dotenv';
 export const app = express();
+dotenv.config();
 
 app.use(express.json());
 
-
-app.use(cors({
-    origin:"http://localhost:5173",
-    credentials:true
-  })); 
+if(process.env.NODE_ENV === 'production'){
+  app.use(cors({
+      origin:"http://localhost:5173",
+      credentials:true
+    })); 
+}else{
+  app.use(cors({
+      origin:"http://localhost:5173",
+      credentials:true
+    })); 
+}
 
 app.use('/api',authRoutes);
 app.use('/api',studentRoutes);
