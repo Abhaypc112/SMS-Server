@@ -5,7 +5,6 @@ import CustomError from "../utils/customError.js";
 
 export const createPermissions = async(permissionData) => {
     const { staffId, studentId, actions } = permissionData;
-    console.log(permissionData)
     const permission = await Permission.findOneAndUpdate(
         { staffId, studentId },
         { $set: { actions } },
