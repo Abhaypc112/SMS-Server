@@ -1,3 +1,4 @@
+import { Permission } from "../models/permissionModel.js";
 import { Student } from "../models/studentModel.js"
 import CustomError from "../utils/customError.js";
 
@@ -22,8 +23,20 @@ export const viewStudentById = async(studenId) => {
     if(!student) throw new CustomError('Student not found',400);
     return student;
 }
-export const viewAllStudents = async(studenId) => {
-    const student = await Student.find();
-    if(!student) throw new CustomError('Student not found',400);
-    return student;
+export const viewAllStudents = async(staffData) => {
+    const {userId, role} = staffData;
+    if(role === 'admin'){
+        const students = await Student.find();
+        if(!students) throw new CustomError('Student not found',400);
+        return students;
+    }else{
+        const permissions = await Permission.find({
+            staffId: userId,
+            actions: { $in: ['read'] }
+        }).select('studentId');
+        const studentIds = permissions.map(p => p.studentId);
+        const students = await Student.find({ _id: { $in: studentIds } });
+        if(!students) throw new CustomError('Student not found',400);
+        return students;
+    }
 }

@@ -21,6 +21,6 @@ export const viewStudentById = catchAsync(async(req,res) => {
     res.status(200).json({message:"sucess",data:student});
 })
 export const viewAllStudents = catchAsync(async(req,res) => {
-    const student = await studentServices.viewAllStudents();
+    const student = await studentServices.viewAllStudents(req.user);
     res.status(200).json({message:"sucess",data:student});
 })

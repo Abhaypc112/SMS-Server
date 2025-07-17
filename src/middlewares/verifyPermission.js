@@ -12,6 +12,8 @@ export const verifyPermission = (action) => {
       studentId: studentId
     });
 
+    console.log(perm)
+
     if ( perm && perm.actions.includes(action)) {
       return next();
     }

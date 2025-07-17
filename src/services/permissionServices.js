@@ -29,3 +29,8 @@ export const deletePermission = async(permissionId) => {
     if(!permission) throw new CustomError('Permission not deleted', 400);
     return permission;
 }
+export const getStaffPermissionById = async(staffId) => {
+    const permission = await Permission.find({staffId})
+    if(!permission) throw new CustomError('Permission not fount', 400);
+    return permission;
+}

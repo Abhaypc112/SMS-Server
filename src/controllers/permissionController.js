@@ -14,3 +14,8 @@ export const deletePermissions = catchAsync(async(req,res) => {
     const permission = await permissionServices.deletePermission(permissionId);
     res.status(201).json({message:"sucess",data:permission});
 })
+export const getStaffPermissionById = catchAsync(async(req,res) => {
+    const {userId} = req.user;
+    const permission = await permissionServices.getStaffPermissionById(userId);
+    res.status(201).json({message:"sucess",data:permission});
+})
