@@ -7,7 +7,7 @@ const studentSchema = new Schema(
         age : {type : Number, required : true},
         grade : {type : String, required : true},
         contactInfo : {type : String, required : true},
-        isActive : {type : Boolean}
+        isActive : {type : Boolean, default:true}
     },
     { timestamps: true }
 );

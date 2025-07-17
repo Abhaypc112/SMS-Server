@@ -9,7 +9,8 @@ export const createStudent = async(userData) => {
 export const updateStudent = async(studenId, userData) => {
     const student = await Student.findByIdAndUpdate(studenId, userData);
     if(!student) throw new CustomError('Student not updated',400);
-    return student;
+     const updatedData = await Student.findById(studenId);
+    return updatedData;
 }
 export const deleteStudent = async(studenId) => {
     const student = await Student.findByIdAndDelete(studenId);
