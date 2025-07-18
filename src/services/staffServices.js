@@ -1,3 +1,4 @@
+import { Permission } from "../models/permissionModel.js";
 import { User } from "../models/userModel.js";
 import bcrypt from 'bcrypt';
 
@@ -34,6 +35,7 @@ export const updateStaff = async(staffId, staffData) => {
 export const deleteStaff = async(staffId) => {
     const staff = await User.findByIdAndDelete(staffId);
     if(!staff) throw new CustomError('Staff not deleted',400);
+    await Permission.deleteMany({ staffId: staffId });
      return {
         _id : staff._id,
         name : staff.name,

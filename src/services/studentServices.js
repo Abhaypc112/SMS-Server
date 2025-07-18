@@ -13,8 +13,9 @@ export const updateStudent = async(studenId, userData) => {
      const updatedData = await Student.findById(studenId);
     return updatedData;
 }
-export const deleteStudent = async(studenId) => {
-    const student = await Student.findByIdAndDelete(studenId);
+export const deleteStudent = async(studentId) => {
+    const student = await Student.findByIdAndDelete(studentId);
+    await Permission.deleteMany({ studentId: studentId });
     if(!student) throw new CustomError('Student not deleted',400);
     return student;
 }
